@@ -3,6 +3,7 @@
 
  - Declarative configuration (using `<Route>` similar to react-router)
  - Idiomatic React; no imperative API or self-contained state (unlike react-router)
+ - Uses `NavigatorExperimental` (soon to replace `Navigator` and `NavigatorIOS` in core React Native)
 
 ## Install
 
