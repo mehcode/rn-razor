@@ -1,0 +1,26 @@
+{
+  "name": "@mehcode/rn-router",
+  "version": "0.1.0",
+  "description": "Router for React Native with declarative configuration similar to React Router.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehcode/rn-router.git"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "react-router",
+    "router",
+    "react-component"
+  ],
+  "author": "Ryan Leckey <leckey.ryan@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mehcode/rn-router/issues"
+  },
+  "homepage": "https://github.com/mehcode/rn-router#readme",
+  "dependencies": {
+    "invariant": "^2.2.1"
+  }
+}
