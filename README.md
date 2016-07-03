@@ -13,7 +13,7 @@ npm install @mehcode/rn-router --save
 
 ## Usage
 
-##### Configuration
+###### Configuration
 
 ```javascript
 import {Router, Route, IndexRoute} from "@mehcode/rn-router";
@@ -42,7 +42,7 @@ class Application extends React.Component {
 }
 ```
 
-##### Navigation
+###### Navigation
 
 ```javascript
 import {StateUtils} from "@mehcode/rn-router";
