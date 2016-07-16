@@ -1,4 +1,4 @@
-# React Native Router
+# (React Native) Razor
 > Router for React Native with declarative configuration similar to React Router.
 
  - Declarative configuration (using `<Route>` similar to react-router)
@@ -8,7 +8,7 @@
 ## Install
 
 ```
-npm install @mehcode/rn-router --save
+npm install rn-razor --save
 ```
 
 ## Usage
@@ -16,7 +16,7 @@ npm install @mehcode/rn-router --save
 ###### Configuration
 
 ```javascript
-import {Router, Route} from "@mehcode/rn-router";
+import {Router, Route} from "rn-razor";
 
 class Application extends React.Component {
   state = {

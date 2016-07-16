@@ -1,11 +1,11 @@
 {
-  "name": "@mehcode/rn-router",
+  "name": "rn-razor",
   "version": "0.2.0",
   "description": "Router for React Native with declarative configuration similar to React Router.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mehcode/rn-router.git"
+    "url": "git+https://github.com/mehcode/rn-razor.git"
   },
   "keywords": [
     "react-native",
@@ -17,9 +17,9 @@
   "author": "Ryan Leckey <leckey.ryan@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mehcode/rn-router/issues"
+    "url": "https://github.com/mehcode/rn-razor/issues"
   },
-  "homepage": "https://github.com/mehcode/rn-router#readme",
+  "homepage": "https://github.com/mehcode/rn-razor#readme",
   "dependencies": {
     "invariant": "^2.2.1",
     "lodash": "^4.13.1"
