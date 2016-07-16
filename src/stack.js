@@ -1,4 +1,5 @@
 /* @flow */
+import {isEqual} from "lodash";
 import React, {PropTypes, Component} from "react";
 import {View, NavigationExperimental} from "react-native";
 
@@ -27,6 +28,10 @@ export default class Stack extends Component {
     this._renderScene = this._renderScene.bind(this);
     this._handleTransitionStart = this._handleTransitionStart.bind(this);
     this._handleTransitionEnd = this._handleTransitionEnd.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
   }
 
   render(): ReactElement {
