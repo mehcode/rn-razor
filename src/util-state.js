@@ -1,8 +1,8 @@
 /* @flow */
-import {isEqual} from "lodash";
+import {isEqual, uniqueId} from "lodash";
 import {
   NavigationExperimental,
-} from 'react-native';
+} from "react-native";
 
 const {
   StateUtils: NavigationStateUtils,
@@ -22,8 +22,12 @@ export function create(options = {}) {
 }
 
 export function push(state: object, name: string, params: ?object): object {
+  if (state.index < (state.routes.length - 1)) {
+    state.routes.splice(state.index + 1);
+  }
+
   return NavigationStateUtils.push(state, {
-    key: "route-" + state.routes.length,
+    key: "route_" + uniqueId(),
     name: name,
     params: params || {},
   });

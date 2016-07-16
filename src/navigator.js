@@ -30,7 +30,7 @@ export default class Navigator extends React.Component {
     // Build map of name => id
     // NOTE: routes cannot change after construction
     this._routesByName = {};
-    for (let routeId of Object.keys(props.routes)) {
+    for (const routeId of Object.keys(props.routes)) {
       const route = props.routes[routeId];
       if (route.name) {
         this._routesByName[route.name] = route.id;
@@ -52,7 +52,7 @@ export default class Navigator extends React.Component {
 
   componentWillUpdate(nextProps) {
     if (this._routeHasChanged(this.props, nextProps)) {
-      this._handleWillFocus(nextProps);
+      this._handleWillFocus(nextProps, this.props);
     }
   }
 
@@ -62,13 +62,19 @@ export default class Navigator extends React.Component {
     }
   }
 
-  _handleWillFocus(props) {
+  _handleWillFocus(nextProps, prevProps) {
     if (this.props.onWillFocus) {
       const route = this._findRoute(
-        props.navigationState.routes[
-          props.navigationState.index].name);
+        nextProps.navigationState.routes[
+          nextProps.navigationState.index].name);
 
-      this.props.onWillFocus(route)
+      let prevLocation;
+      if (prevProps) {
+        prevLocation = prevProps.navigationState.routes[
+          prevProps.navigationState.index];
+      }
+
+      this.props.onWillFocus(route, prevLocation);
     }
   }
 
@@ -101,7 +107,7 @@ export default class Navigator extends React.Component {
         style={this.props.styles}
         render={this.props.render}
       />
-    )
+    );
   }
 
   _findRoute(name) {
@@ -122,7 +128,7 @@ export default class Navigator extends React.Component {
       params: sceneProps.scene.route.params || {},
       ref: (component) => {
         this._routeComponents[route.id] = component;
-      }
+      },
     };
 
     if (this.props.createElement) {

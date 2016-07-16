@@ -55,7 +55,7 @@ export default class Router extends Component {
     // Cache list of parents for each route; useful in determining
     // onEnter and onLeave
     this._routeParents = {};
-    for (let routeId of Object.keys(this._routes)) {
+    for (const routeId of Object.keys(this._routes)) {
       this._routeParents[routeId] = [];
 
       let parentId = this._routes[routeId].parent;
@@ -81,6 +81,7 @@ export default class Router extends Component {
         render={this.props.render}
         routes={this._routes}
         style={this.props.style}
+        createElement={this.props.createElement}
         onDidFocus={this._handleDidFocus}
         onWillFocus={this._handleWillFocus}
       />
@@ -88,7 +89,7 @@ export default class Router extends Component {
   }
 
   _traverseRoutes(routes, parent) {
-    for (let route of routes) {
+    for (const route of routes) {
       invariant(!!route.props.component ^ !!route.props.children,
         "A route may either have a component or have children",
       );
@@ -113,7 +114,7 @@ export default class Router extends Component {
     }
   }
 
-  _handleWillFocus(nextRoute) {
+  _handleWillFocus(nextRoute, prevLocation) {
     let currentRoute;
     if (this._routeStack.length > 0) {
       currentRoute = this._routes[
@@ -163,11 +164,11 @@ export default class Router extends Component {
 
     // 2 - Iterate from the divergence index and add all parent routes
     for (; dIndex >= 0; dIndex--) {
-      this._pushRouteToStack(nextRouteParents[dIndex]);
+      this._pushRouteToStack(nextRouteParents[dIndex], prevLocation);
     }
 
     // 3 - Add to the route stack
-    this._pushRouteToStack(nextRoute.id);
+    this._pushRouteToStack(nextRoute.id, prevLocation);
 
     if (this.props.onWillFocus) {
       this.props.onWillFocus(nextRoute, currentRoute);
@@ -179,11 +180,11 @@ export default class Router extends Component {
     }
   }
 
-  _pushRouteToStack(id) {
+  _pushRouteToStack(id, prevLocation) {
     const route = this._routes[id];
 
     if (route.onEnter != null) {
-      route.onEnter();
+      route.onEnter(route, prevLocation);
     }
 
     this._routeStack.push(id);
