@@ -2,7 +2,7 @@
 import React, {PropTypes, Component} from "react";
 import {View, NavigationExperimental} from "react-native";
 
-import {floatFromBottom} from "./transition";
+import {fade} from "./transition";
 
 const {
   Card: NavigationCard,
@@ -13,13 +13,20 @@ export default class Stack extends Component {
   static propTypes = {
     navigationState: PropTypes.object.isRequired,
     style: View.propTypes.style,
-  }
+    render: PropTypes.func,
+  };
+
+  state = {
+    inTransition: false,
+  };
 
   constructor(props, context) {
     super(props, context);
 
     this._render = this._render.bind(this);
     this._renderScene = this._renderScene.bind(this);
+    this._handleTransitionStart = this._handleTransitionStart.bind(this);
+    this._handleTransitionEnd = this._handleTransitionEnd.bind(this);
   }
 
   render(): ReactElement {
@@ -27,6 +34,8 @@ export default class Stack extends Component {
       <NavigationTransitioner
         navigationState={this.props.navigationState}
         render={this._render}
+        onTransitionEnd={this._handleTransitionEnd}
+        onTransitionStart={this._handleTransitionStart}
         style={this.props.style}
       />
     )
@@ -42,14 +51,11 @@ export default class Stack extends Component {
       })
     );
 
-    return (
-      <View style={{flex: 1}}>
-        <View style={{flex: 1}}>
-          {scenes}
-        </View>
-        {/* {this.props.children} */}
-      </View>
-    );
+    if (this.props.render) {
+      return this.props.render(scenes);
+    }
+
+    return scenes;
   }
 
   _renderScene(props): ReactElement {
@@ -59,8 +65,16 @@ export default class Stack extends Component {
         key={"card_" + props.scene.key}
         renderScene={this.props.renderScene}
         panHandlers={null}
-        style={floatFromBottom(props)}
+        style={fade(props, this.state)}
       />
     );
+  }
+
+  _handleTransitionStart(currentProps, prevProps) {
+    this.setState({inTransition: true})
+  }
+
+  _handleTransitionEnd(currentProps, prevProps) {
+    this.setState({inTransition: false})
   }
 }

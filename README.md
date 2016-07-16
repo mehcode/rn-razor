@@ -16,7 +16,7 @@ npm install @mehcode/rn-router --save
 ###### Configuration
 
 ```javascript
-import {Router, Route, IndexRoute} from "@mehcode/rn-router";
+import {Router, Route} from "@mehcode/rn-router";
 
 class Application extends React.Component {
   state = {
@@ -33,7 +33,7 @@ class Application extends React.Component {
       state={this.state.routerState}
       onUpdate={this.handleUpdate}
     >
-      <IndexRoute component={Index} />
+      <Route name="index" component={Index} />
       <Route name="profile" component={Profile} />
       <Route name="contacts" component={ContactList} />
       <Route name="contact" component={ContactDetail} />

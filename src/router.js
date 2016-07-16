@@ -29,6 +29,10 @@ export default class Router extends Component {
     // Style for containing view
     style: View.propTypes.style,
 
+    // When the router is ready to render a stack of scenes,
+    // it will use this function.
+    render: PropTypes.func,
+
     // Callback when router state is updated
     onUpdate: PropTypes.func.isRequired,
   };
@@ -65,6 +69,7 @@ export default class Router extends Component {
         routes={routesToMap(React.Children.toArray(this.props.children))}
         navigationState={this.props.routerState}
         style={this.props.style}
+        render={this.props.render}
       />
     );
   }

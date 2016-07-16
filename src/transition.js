@@ -19,12 +19,17 @@ function initial(props): Object {
   };
 }
 
-export function floatFromBottom(props): Object {
+export function fade(props, state): Object {
   const {
     layout,
     position,
+    navigationState,
     scene,
   } = props;
+
+  const {
+    inTransition,
+  } = state;
 
   if (!layout.isMeasured) {
     return initial(props);
@@ -32,24 +37,20 @@ export function floatFromBottom(props): Object {
 
   const index = scene.index;
   const inputRange = [index - 1, index, index + 1];
-  const height = layout.initHeight;
+  const focused = navigationState.index === scene.index;
 
   const opacity = position.interpolate({
     inputRange,
     outputRange: [0, 1, 0],
   });
 
-  const translateX = 0;
-  const translateY = position.interpolate({
-    inputRange,
-    outputRange: [height, 0, 0],
-  });
+  const transform = [];
+  if (!(focused || inTransition)) {
+    transform.push({translateY: 1000000, translateX: 1000000});
+  }
 
   return {
     opacity,
-    transform: [
-      { translateX },
-      { translateY },
-    ],
+    transform,
   };
 }

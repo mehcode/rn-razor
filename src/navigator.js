@@ -12,6 +12,7 @@ const {
 export default class Navigator extends React.Component {
   static propTypes = {
     style: View.propTypes.style,
+    render: PropTypes.func,
   };
 
   constructor(props, context) {
@@ -41,6 +42,7 @@ export default class Navigator extends React.Component {
         navigationState={this.props.navigationState}
         renderScene={this._renderScene}
         style={this.props.styles}
+        render={this.props.render}
       />
     )
   }
