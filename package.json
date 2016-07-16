@@ -1,6 +1,6 @@
 {
   "name": "rn-razor",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "description": "Router for React Native with declarative configuration similar to React Router.",
   "main": "index.js",
   "repository": {
