@@ -43,7 +43,7 @@ export default class Stack extends Component {
         onTransitionStart={this._handleTransitionStart}
         style={this.props.style}
       />
-    )
+    );
   }
 
   _render(props): ReactElement {
@@ -76,10 +76,10 @@ export default class Stack extends Component {
   }
 
   _handleTransitionStart(currentProps, prevProps) {
-    this.setState({inTransition: true})
+    this.setState({inTransition: true});
   }
 
   _handleTransitionEnd(currentProps, prevProps) {
-    this.setState({inTransition: false})
+    this.setState({inTransition: false});
   }
 }
