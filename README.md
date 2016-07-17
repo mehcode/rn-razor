@@ -49,13 +49,13 @@ routerState = StateUtils.resetTo(routerState, "contact", {id: 10});
 
 ### `<Router>`
 
-###### `routerState`
+##### `routerState`
 
 The current state of navigation.
 
 Can be initialized to an initial route with `StateUtils.create({initialRoute: "..."})`.
 
-####### Example
+###### Example
 
 ```
 {
@@ -67,23 +67,23 @@ Can be initialized to an initial route with `StateUtils.create({initialRoute: ".
 }
 ```
 
-###### `children`
+##### `children`
 
 A collection of `<Route>` components providing the declarative configuration.
 
-###### `onWillFocus`
+##### `onWillFocus`
 
 Called when a route is about to be rendered or "focused" (name comes from react-native). This is called after the route's `onEnter` (if present).
 
-###### `onDidFocus`
+##### `onDidFocus`
 
 Called when a route has been rendered or "focused". This is called after the route component's `componentDidMount` (tip: good place to hide a splash screen from [rn-splash-screen](https://github.com/mehcode/rn-splash-screen)).
 
-###### `createElement`
+##### `createElement`
 
 When the router is ready to render a specific scene, it will use this function to create the elements.
 
-####### Default
+###### Default
 
 ```js
 function createElement(Component, props) {
@@ -91,13 +91,13 @@ function createElement(Component, props) {
 }
 ```
 
-###### `render`
+##### `render`
 
 When the router is ready to render the scene stack, it will use this function.
 
 Use this callback to add persistent views around the scene stack. Perhaps a navigation drawer or wrap `scenes` in `KeyboardAvoidingView` from react-native.
 
-####### Default
+###### Default
 
 ```js
 function render(scenes) {
@@ -107,23 +107,23 @@ function render(scenes) {
 
 ### `<Route>`
 
-###### `name`
+##### `name`
 
 The route key to use as a unique index during navigation.
 
-###### `component`
+##### `component`
 
 The component to be rendered for the route.
 
-###### `onEnter`
+##### `onEnter`
 
 Called when a route is about to be entered.
 
-###### `onLeave`
+##### `onLeave`
 
 Called when a route is about to be exited. Called before the next route's `onEnter`.
 
-###### `children`
+##### `children`
 
 A collection of `<Route>` components that are treated as a group, invoking their parent's `onEnter` and `onLeave` as a group. 
 
