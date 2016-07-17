@@ -23,16 +23,8 @@ class Application extends React.Component {
     routerState: StateUtils.create({initialRoute: "index"}),
   };
 
-  @autobind
-  handleUpdate(nextRouterState) {
-    this.setState({routerState: nextRouterState});
-  }
-
   render() {
-    <Router
-      routerState={this.state.routerState}
-      onUpdate={this.handleUpdate}
-    >
+    <Router routerState={this.state.routerState}>
       <Route name="index" component={Index} />
       <Route name="profile" component={Profile} />
       <Route name="contacts" component={ContactList} />
