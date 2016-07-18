@@ -21,11 +21,14 @@ export function create(options = {}) {
   return result;
 }
 
-export function push(state: object, name: string, params: ?object): object {
+function shrinkToFit(state) {
   if (state.index < (state.routes.length - 1)) {
     state.routes.splice(state.index + 1);
   }
+}
 
+export function push(state: object, name: string, params: ?object): object {
+  shrinkToFit(state);
   return NavigationStateUtils.push(state, {
     key: "route_" + uniqueId(),
     name: name,
@@ -34,6 +37,7 @@ export function push(state: object, name: string, params: ?object): object {
 }
 
 export function pop(state: object): object {
+  shrinkToFit(state);
   return NavigationStateUtils.pop(state);
 }
 
