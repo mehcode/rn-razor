@@ -49,7 +49,9 @@ export default class Stack extends Component {
   _render(props): ReactElement {
     const {navigationState} = props;
 
-    const scenes = props.scenes.map((scene) =>
+    const scenes = props.scenes.filter((scene) =>
+      !scene.isStale
+    ).map((scene) =>
       this._renderScene({
         ...props,
         scene,
