@@ -109,7 +109,7 @@ export default class Router extends Component {
       this.props.onDidFocus(route, component);
     }
 
-    if (component.routerDidFocus) {
+    if (component && component.routerDidFocus) {
       component.routerDidFocus();
     }
   }
