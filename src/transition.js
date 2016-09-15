@@ -8,13 +8,14 @@ function initial(props): Object {
 
   const focused = navigationState.index === scene.index;
   const opacity = focused ? 1 : 0;
+
   // If not focused, move the scene to the far away.
   const translate = focused ? 0 : 1000000;
   return {
     opacity,
     transform: [
-      { translateX: translate },
-      { translateY: translate },
+      {translateX: translate},
+      {translateY: translate},
     ],
   };
 }
@@ -23,6 +24,7 @@ export function fade(props, state): Object {
   const {
     layout,
     position,
+    progress,
     navigationState,
     scene,
   } = props;
@@ -35,16 +37,14 @@ export function fade(props, state): Object {
     return initial(props);
   }
 
-  const index = scene.index;
-  const inputRange = [index - 1, index, index + 1];
   const focused = navigationState.index === scene.index;
 
+  const transform = [];
   const opacity = position.interpolate({
-    inputRange,
+    inputRange: [scene.index - 1, scene.index, scene.index + 1],
     outputRange: [0, 1, 0],
   });
 
-  const transform = [];
   if (!(focused || inTransition)) {
     transform.push({translateY: 1000000, translateX: 1000000});
   }

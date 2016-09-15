@@ -1,6 +1,6 @@
 /* @flow */
 import {isEqual} from "lodash";
-import React, {PropTypes, Component} from "react";
+import React, {PropTypes} from "react";
 import {View, NavigationExperimental} from "react-native";
 
 import {fade} from "./transition";
@@ -10,7 +10,7 @@ const {
   Transitioner: NavigationTransitioner,
 } = NavigationExperimental;
 
-export default class Stack extends Component {
+export default class Stack extends React.PureComponent {
   static propTypes = {
     navigationState: PropTypes.object.isRequired,
     style: View.propTypes.style,
@@ -30,10 +30,6 @@ export default class Stack extends Component {
     this._handleTransitionEnd = this._handleTransitionEnd.bind(this);
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return !isEqual(this.props, nextProps) || !isEqual(this.state, nextState);
-  }
-
   render(): ReactElement {
     return (
       <NavigationTransitioner
@@ -50,7 +46,7 @@ export default class Stack extends Component {
     const {navigationState} = props;
 
     const scenes = props.scenes.filter((scene) =>
-      !scene.isStale
+      !scene.isStale || scene.index === this.state.prevScene
     ).map((scene) =>
       this._renderScene({
         ...props,
@@ -78,7 +74,7 @@ export default class Stack extends Component {
   }
 
   _handleTransitionStart(currentProps, prevProps) {
-    this.setState({inTransition: true});
+    this.setState({inTransition: true, currentScene: currentProps.scene.index, prevScene: prevProps.scene.index});
   }
 
   _handleTransitionEnd(currentProps, prevProps) {

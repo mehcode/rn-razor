@@ -27,7 +27,14 @@ function shrinkToFit(state) {
   }
 }
 
+function atRoute(state, name, params) {
+  const currentRoute = state.routes[state.index] || {};
+  return (currentRoute.name === name && isEqual((currentRoute.params || {}), (params || {})));
+}
+
 export function push(state: object, name: string, params: ?object): object {
+  if (atRoute(state, name, params)) return state;
+
   shrinkToFit(state);
   return NavigationStateUtils.push(state, {
     key: "route_" + uniqueId(),

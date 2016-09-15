@@ -10,7 +10,7 @@ const {
   StateUtils: NavigationStateUtils,
 } = NavigationExperimental;
 
-export default class Navigator extends React.Component {
+export default class Navigator extends React.PureComponent {
   static propTypes = {
     style: View.propTypes.style,
     render: PropTypes.func,
@@ -36,10 +36,6 @@ export default class Navigator extends React.Component {
         this._routesByName[route.name] = route.id;
       }
     }
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return !isEqual(this.props, nextProps);
   }
 
   componentWillMount() {
