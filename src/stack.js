@@ -38,15 +38,22 @@ export default class Stack extends React.PureComponent {
         onTransitionEnd={this._handleTransitionEnd}
         onTransitionStart={this._handleTransitionStart}
         style={this.props.style}
+        configureTransition={this._configureTransition}
       />
     );
+  }
+
+  _configureTransition() {
+    return {
+      // useNativeDriver: true,
+    };
   }
 
   _render(props): ReactElement {
     const {navigationState} = props;
 
     const scenes = props.scenes.filter((scene) =>
-      !scene.isStale || scene.index === this.state.prevScene
+      !scene.isStale // || scene.index === this.state.prevScene
     ).map((scene) =>
       this._renderScene({
         ...props,
@@ -78,6 +85,6 @@ export default class Stack extends React.PureComponent {
   }
 
   _handleTransitionEnd(currentProps, prevProps) {
-    this.setState({inTransition: false});
+    this.setState({inTransition: false, currentScene: -1, prevScene: -1});
   }
 }
