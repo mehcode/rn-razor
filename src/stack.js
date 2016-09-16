@@ -81,7 +81,7 @@ export default class Stack extends React.PureComponent {
   }
 
   _handleTransitionStart(currentProps, prevProps) {
-    this.setState({inTransition: true, currentScene: currentProps.scene.index, prevScene: prevProps.scene.index});
+    this.setState({inTransition: true, currentScene: (currentProps.scene || {}).index, prevScene: (prevProps.scene || {}).index});
   }
 
   _handleTransitionEnd(currentProps, prevProps) {
